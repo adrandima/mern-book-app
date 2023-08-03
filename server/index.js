@@ -1,10 +1,28 @@
-const express = require('express');
+import dotenv from "dotenv";
+dotenv.config();
+
+import express from "express";
+import bodyParser from "body-parser";
+import cors from 'cors';
+
+import initiateMongoServer from "./config/db";
+import { bookRouter } from './src/router/book';
+import { authRouter } from './src/router/auth';
+
+// Initiate Mongo Server
+initiateMongoServer();
 const app = express();
+const port = process.env.PORT || 3000;
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
+// Middleware
+app.use(bodyParser.json());
 
-app.listen(3000, () => {
-  console.log('Server running on port 3000');
+app.use(cors());
+
+// Routes
+app.use('/api/book', bookRouter);
+app.use('/api/auth', authRouter);
+
+app.listen(port, () => {
+  console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
 });
