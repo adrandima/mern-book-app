@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import User from "../models/user";
-import Book from "../models/book";
+import Book from "../models/Book";
 
 import nodemailer from "nodemailer";
 import Mailgen from "mailgen";
