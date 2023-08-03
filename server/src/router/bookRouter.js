@@ -5,7 +5,7 @@ import {
   getBooks,
   getBookById,
   updateBook,
-  deleteBooks,
+  deleteBook,
 } from "../controllers/bookController";
 import { authMiddleware } from "../controllers/authController";
 
@@ -25,6 +25,6 @@ bookRouter.get("/:id", authMiddleware, getBookById);
 bookRouter.put("/:id", authMiddleware, updateBook);
 
 // Delete a book
-bookRouter.delete("/:id", authMiddleware, deleteBooks);
+bookRouter.delete("/:id", authMiddleware, deleteBook);
 
 export { bookRouter };

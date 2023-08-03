@@ -1,7 +1,5 @@
 // Book.js
-import mongoose from "mongoose";
-
-const { Schema } = mongoose;
+import { model,Schema } from "mongoose";
 
 const bookSchema = new Schema({
   name: { type: String, required: true },
@@ -9,4 +7,4 @@ const bookSchema = new Schema({
   author: { type: Schema.Types.ObjectId, ref: "Author", required: true },
 });
 
-export default mongoose.model("Book", bookSchema);
+export default model("Book", bookSchema);

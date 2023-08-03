@@ -8,6 +8,7 @@ import cors from 'cors';
 import initiateMongoServer from "./config/db";
 import { bookRouter } from './src/router/bookRouter';
 import { authRouter } from './src/router/authRouter';
+import { authorRouter } from './src/router/authorRouter';
 
 // Initiate Mongo Server
 initiateMongoServer();
@@ -22,6 +23,7 @@ app.use(cors());
 // Routes
 app.use('/api/book', bookRouter);
 app.use('/api/auth', authRouter);
+app.use('/api/author', authorRouter);
 
 app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${port}`);

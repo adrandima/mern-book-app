@@ -1,11 +1,9 @@
 // Author.js
-import mongoose from "mongoose";
-
-const { Schema } = mongoose;
+import { model,Schema } from "mongoose";
 
 const authorSchema = new Schema({
   first_name: { type: String, required: true },
   last_name: { type: String, required: true },
 });
 
-export default mongoose.model("Author", authorSchema);
+export default model("Author", authorSchema);
