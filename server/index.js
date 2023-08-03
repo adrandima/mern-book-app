@@ -6,13 +6,13 @@ import bodyParser from "body-parser";
 import cors from 'cors';
 
 import initiateMongoServer from "./config/db";
-import { bookRouter } from './src/router/book';
-import { authRouter } from './src/router/auth';
+import { bookRouter } from './src/router/bookRouter';
+import { authRouter } from './src/router/authRouter';
 
 // Initiate Mongo Server
 initiateMongoServer();
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3003;
 
 // Middleware
 app.use(bodyParser.json());
