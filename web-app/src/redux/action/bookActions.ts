@@ -19,8 +19,7 @@ export interface Book {
   _id: string;
   name: string;
   isbn: string;
-  publicationYear: number;
-  genre: string;
+  author: number;
 }
 
 export const fetchBooksRequest = () => ({

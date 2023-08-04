@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Modal, Form, Button } from "react-bootstrap";
 import { EditModalProps } from "../interface";
 
+
 const EditModal: React.FC<EditModalProps> = ({
   showModal,
   setShowModal,
@@ -13,8 +14,7 @@ const EditModal: React.FC<EditModalProps> = ({
   const [formErrors, setFormErrors] = useState({
     name: "",
     isbn: "",
-    publicationYear: "",
-    genre: "",
+    author: "",
   });
 
   const isEdit = selectedData?._id ? true : false;
@@ -24,8 +24,7 @@ const EditModal: React.FC<EditModalProps> = ({
     const errors = {
       name: "",
       isbn: "",
-      publicationYear: "",
-      genre: "",
+      author: "",
     };
 
     // Validate Name
@@ -41,14 +40,8 @@ const EditModal: React.FC<EditModalProps> = ({
     }
 
     // Validate Publication Year
-    if (!selectedData?.publicationYear) {
-      errors.publicationYear = "Publication Year is required";
-      isValid = false;
-    }
-
-    // Validate Genre
-    if (!selectedData?.genre.trim()) {
-      errors.genre = "Genre is required";
+    if (!selectedData?.author) {
+      errors.author = "Publication Year is required";
       isValid = false;
     }
 
@@ -107,39 +100,23 @@ const EditModal: React.FC<EditModalProps> = ({
           </Form.Control.Feedback>
         </Form.Group>
         <Form.Group controlId="formEmail">
-          <Form.Label>Publication Year</Form.Label>
-          <Form.Control
-            type="number"
-            value={selectedData?.publicationYear || 1900}
-            onChange={(e) =>
-              setSelectedDataCallback({
-                ...selectedData,
-                publicationYear: e.target.value,
-              })
-            }
-            isInvalid={!!formErrors.publicationYear}
-          />
-          <Form.Control.Feedback type="invalid">
-            {formErrors.publicationYear}
-          </Form.Control.Feedback>
-        </Form.Group>
-        <Form.Group controlId="formGenre">
-          <Form.Label>Genre</Form.Label>
+          <Form.Label>Author</Form.Label>
           <Form.Control
             type="text"
-            value={selectedData?.genre || ""}
+            value={JSON.stringify(selectedData?.author)}
             onChange={(e) =>
               setSelectedDataCallback({
                 ...selectedData,
-                genre: e.target.value,
+                author: e.target.value,
               })
             }
-            isInvalid={!!formErrors.genre}
+            isInvalid={!!formErrors.author}
           />
           <Form.Control.Feedback type="invalid">
-            {formErrors.genre}
+            {formErrors.author}
           </Form.Control.Feedback>
         </Form.Group>
+
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={() => setShowModal(false)}>
