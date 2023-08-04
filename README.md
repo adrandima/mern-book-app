@@ -37,8 +37,8 @@ if the server runs on the different port you need to chnage that port in <span s
 # Screenshots of the UIs
 
 1. Sign In
-   ![Alt Text](./project_resources/signin.PNG)
-2. Sign In
+   ![Alt Text](./project_resources/sign_in.PNG)
+2. Sign Up
    ![Alt Text](./project_resources/sign_up.PNG)
 3. Table View
    ![Alt Text](./project_resources/table.PNG)
@@ -49,10 +49,10 @@ if the server runs on the different port you need to chnage that port in <span s
 6. Validation
    ![Alt Text](./project_resources/validation.PNG)
 7. Edit Author
-   ![Alt Text](./project_resources/updateAuthor.PNG)
+   ![Alt Text](./project_resources/update_author.png)
 8. Add Author  [<span style="font-size: larger; color: red">*</span>There are two ways to add authors]
-   ![Alt Text](./project_resources/addAuthor.PNG)
-   ![Alt Text](./project_resources/AddAuthor2.PNG)
+   ![Alt Text](./project_resources/add_author.png)
+   ![Alt Text](./project_resources/add_author2.png)
 
 
 ## Signup Functionality
