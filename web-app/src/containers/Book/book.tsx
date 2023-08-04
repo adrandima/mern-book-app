@@ -59,6 +59,10 @@ class Book extends React.Component<Props> {
     }
   }
 
+  fetchBooksAndAuthors = () => {
+    this.props.fetchBooks();
+    this.props.fetchAuthors();
+  };
   // Pagination
   indexOfLastItem = () => {
     return this.state.currentPage * 5;
@@ -123,10 +127,14 @@ class Book extends React.Component<Props> {
 
   handleAuthorUpdate = (author: IAuthor) => {
     this.props.updateAuthor(author);
+    this.fetchBooksAndAuthors();
+    this.setState({ showUpdateModal: false });
   };
 
   handleAuthorCreation = (author: IAuthor) => {
     this.props.createAuthor(author);
+    this.fetchBooksAndAuthors();
+    this.setState({ showCreateModal: false });
   };
 
   handleSave = () => {
@@ -175,16 +183,16 @@ class Book extends React.Component<Props> {
               Add Book
             </Button>
             <Button
-              variant="primary"
-              onClick={() => this.setState({ showUpdateModal: true })}
-            >
-              Update Author
-            </Button>
-            <Button
-              variant="primary"
+              variant="secondary"
               onClick={() => this.setState({ showCreateModal: true })}
             >
               Create Author
+            </Button>
+            <Button
+              variant="warning"
+              onClick={() => this.setState({ showUpdateModal: true })}
+            >
+              Update Author
             </Button>
           </div>
         </Form.Group>
