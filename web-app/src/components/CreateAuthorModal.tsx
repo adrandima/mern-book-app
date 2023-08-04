@@ -6,28 +6,23 @@ interface AuthorComponentProps {
   authors: IAuthor[];
   showModal: boolean;
   setShowModal: (value: boolean) => void;
-  handleUpdate: (author: IAuthor) => void;
+  handleCreate: (author: IAuthor) => void;
 }
 
 const UpdateAuthorModal: React.FC<AuthorComponentProps> = ({
-  authors,
   setShowModal,
   showModal,
-  handleUpdate,
+  handleCreate,
 }) => {
   const [author, setAuthor] = useState<IAuthor>({
-    _id: "",
     first_name: "",
     last_name: "",
   });
 
   const [isEdit, setIsEdit] = useState<boolean>(false);
 
-
-  const [selectedAuthor, setSelectedAuthor] = useState<IAuthor>();
-
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    !isEdit && setIsEdit(true)
+    !isEdit && setIsEdit(true);
     const { name, value } = event.target;
     setAuthor((prevState) => ({
       ...prevState,
@@ -35,44 +30,20 @@ const UpdateAuthorModal: React.FC<AuthorComponentProps> = ({
     }));
   };
 
-  const handleAuthorSelection = (selectedAuthor: IAuthor) => {
-    setSelectedAuthor(selectedAuthor);
-    setAuthor(selectedAuthor);
-  };
-
   return (
     <Modal show={showModal} onHide={() => setShowModal(false)}>
       <Modal.Header closeButton>
-        <Modal.Title>Update Author</Modal.Title>
+        <Modal.Title>Add Author</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form.Group>
-          <Form.Label>Select Author:</Form.Label>
-          <Dropdown>
-            <Dropdown.Toggle variant="secondary">
-              {selectedAuthor
-                ? `${selectedAuthor?.first_name} ${selectedAuthor?.last_name}`
-                : "Select an author"}
-            </Dropdown.Toggle>
-            <Dropdown.Menu>
-              {authors.map((author) => (
-                <Dropdown.Item
-                  key={author._id}
-                  onClick={() => handleAuthorSelection(author)}
-                >
-                  {`${author.first_name} ${author.last_name}`}
-                </Dropdown.Item>
-              ))}
-            </Dropdown.Menu>
-          </Dropdown>
-        </Form.Group>
         <Form.Group>
           <Form.Label>First Name:</Form.Label>
           <Form.Control
             type="text"
             name="first_name"
             value={author?.first_name || ""}
-            onChange={handleInputChange} 
+            onChange={handleInputChange}
+            required={true}
           />
         </Form.Group>
         <Form.Group>
@@ -81,7 +52,8 @@ const UpdateAuthorModal: React.FC<AuthorComponentProps> = ({
             type="text"
             name="last_name"
             value={author?.last_name || ""}
-            onChange={handleInputChange} 
+            onChange={handleInputChange}
+            required={true}
           />
         </Form.Group>
       </Modal.Body>
@@ -89,7 +61,11 @@ const UpdateAuthorModal: React.FC<AuthorComponentProps> = ({
         <Button variant="secondary" onClick={() => setShowModal(false)}>
           Close
         </Button>
-        <Button variant="primary" onClick={()=> handleUpdate(author)} disabled={!isEdit}>
+        <Button
+          variant="primary"
+          onClick={() => handleCreate(author)}
+          disabled={!isEdit}
+        >
           Save Changes
         </Button>
       </Modal.Footer>
@@ -98,4 +74,3 @@ const UpdateAuthorModal: React.FC<AuthorComponentProps> = ({
 };
 
 export default UpdateAuthorModal;
-

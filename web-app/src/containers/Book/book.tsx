@@ -8,13 +8,15 @@ import {
   deleteBook,
   createBook,
   fetchAuthors,
-  updateAuthor
+  updateAuthor,
+  createAuthor,
 } from "../../redux/action";
 import TablePagination from "../../components/tablePagination";
 import EditModal from "../../components/editModal";
 import { IAuthor, IBook } from "../../interface/book";
 
 import UpdateAuthorModal from "../../components/UpdateAuthorModal";
+import CreateAuthorModal from "../../components/CreateAuthorModal";
 
 interface StateProps {
   books: IBook[];
@@ -30,6 +32,7 @@ interface DispatchProps {
   createBook: (book: IBook) => void;
   fetchAuthors: () => void;
   updateAuthor: (author: IAuthor) => void;
+  createAuthor: (author: IAuthor) => void;
 }
 
 type Props = StateProps & DispatchProps;
@@ -118,9 +121,13 @@ class Book extends React.Component<Props> {
     }
   };
 
-  handleAuthorUpdate=(author: IAuthor) => {
-    this.props.updateAuthor(author)
-  }
+  handleAuthorUpdate = (author: IAuthor) => {
+    this.props.updateAuthor(author);
+  };
+
+  handleAuthorCreation = (author: IAuthor) => {
+    this.props.createAuthor(author);
+  };
 
   handleSave = () => {
     const { selectedData, data } = this.state;
@@ -147,6 +154,7 @@ class Book extends React.Component<Props> {
       currentPage,
       showModal,
       showUpdateModal,
+      showCreateModal,
       selectedData,
     } = this.state;
 
@@ -171,6 +179,12 @@ class Book extends React.Component<Props> {
               onClick={() => this.setState({ showUpdateModal: true })}
             >
               Update Author
+            </Button>
+            <Button
+              variant="primary"
+              onClick={() => this.setState({ showCreateModal: true })}
+            >
+              Create Author
             </Button>
           </div>
         </Form.Group>
@@ -233,6 +247,14 @@ class Book extends React.Component<Props> {
           handleUpdate={this.handleAuthorUpdate}
         />
 
+        <CreateAuthorModal
+          showModal={showCreateModal}
+          setShowModal={(value: boolean) =>
+            this.setState({ showCreateModal: value })
+          }
+          authors={this.props.authors}
+          handleCreate={this.handleAuthorCreation}
+        />
       </div>
     );
   }
@@ -256,7 +278,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
       deleteBook: deleteBook,
       createBook: createBook,
       fetchAuthors: fetchAuthors,
-      updateAuthor: updateAuthor
+      updateAuthor: updateAuthor,
+      createAuthor: createAuthor,
     },
     dispatch
   );
