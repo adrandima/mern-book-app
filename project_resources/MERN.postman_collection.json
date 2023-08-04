@@ -1,0 +1,332 @@
+{
+	"info": {
+		"_postman_id": "8885d402-0201-41ec-9423-e6d92e05ad45",
+		"name": "MERN",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "28416652"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"test2@gmail.com\",\r\n    \"password\": \"test1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3003/api/auth/register"
+					},
+					"response": []
+				},
+				{
+					"name": "verify",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/api/auth/verify"
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"test2@gmail.com\",\r\n    \"password\": \"test1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3003/api/auth/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Remove",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGFiMDBiNzEyZDNmMzM2YjFmN2MxZDciLCJlbWFpbCI6InRlc3QyQGdtYWlsLmNvbSIsImlhdCI6MTY4ODkzMDM0MiwiZXhwIjoxNjg4OTMzOTQyfQ.Ta-eI-MAFVWgt189KFWx-h13eNSKPqE_R0N872fJnuQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/auth/remove/?userId=64ab00b712d3f336b1f7c1d7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"auth",
+								"remove",
+								""
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "64ab00b712d3f336b1f7c1d7"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Book",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGNiZjNkNzVjYTkyNjQ1ZDExY2JhZmQiLCJlbWFpbCI6InRlc3QyQGdtYWlsLmNvbSIsImlhdCI6MTY5MTEyMTMxMCwiZXhwIjoxNjkxMTI0OTEwfQ.sEaDdJQXT99aNo6VQWV0u3-DUnGOIn_B4J-PrAmwyXk",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3003/api/book?page=1&limit=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"book"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGNiZjNkNzVjYTkyNjQ1ZDExY2JhZmQiLCJlbWFpbCI6InRlc3QyQGdtYWlsLmNvbSIsImlhdCI6MTY5MTExNzU3MSwiZXhwIjoxNjkxMTIxMTcxfQ._4P7T-4XzvxUr6f5EMmDy9mSHAvNH3JeEiBDXuYIVE0",
+								"type": "text"
+							}
+						],
+						"url": "http://localhost:3003/api/book/64cc698c908659c36f3937cc"
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGNiZjNkNzVjYTkyNjQ1ZDExY2JhZmQiLCJlbWFpbCI6InRlc3QyQGdtYWlsLmNvbSIsImlhdCI6MTY5MTEyMTMxMCwiZXhwIjoxNjkxMTI0OTEwfQ.sEaDdJQXT99aNo6VQWV0u3-DUnGOIn_B4J-PrAmwyXk",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Sample Book10\",\r\n  \"isbn\": \"1234567890\",\r\n  \"author\": {\r\n    \"first_name\": \"John2\",\r\n    \"last_name\": \"Doe\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3003/api/book"
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGNiZjNkNzVjYTkyNjQ1ZDExY2JhZmQiLCJlbWFpbCI6InRlc3QyQGdtYWlsLmNvbSIsImlhdCI6MTY5MTExNzU3MSwiZXhwIjoxNjkxMTIxMTcxfQ._4P7T-4XzvxUr6f5EMmDy9mSHAvNH3JeEiBDXuYIVE0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Sample Book8\",\r\n  \"isbn\": \"12345678906\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3003/api/book/64cc698c908659c36f3937cc"
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGNiZjNkNzVjYTkyNjQ1ZDExY2JhZmQiLCJlbWFpbCI6InRlc3QyQGdtYWlsLmNvbSIsImlhdCI6MTY5MTExNzU3MSwiZXhwIjoxNjkxMTIxMTcxfQ._4P7T-4XzvxUr6f5EMmDy9mSHAvNH3JeEiBDXuYIVE0",
+								"type": "text"
+							}
+						],
+						"url": "http://localhost:3003/api/book/64cc69cd5b6cd48f5c1c931b"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Author",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGNiZjNkNzVjYTkyNjQ1ZDExY2JhZmQiLCJlbWFpbCI6InRlc3QyQGdtYWlsLmNvbSIsImlhdCI6MTY5MTEyMTMxMCwiZXhwIjoxNjkxMTI0OTEwfQ.sEaDdJQXT99aNo6VQWV0u3-DUnGOIn_B4J-PrAmwyXk",
+								"type": "text"
+							}
+						],
+						"url": "http://localhost:3003/api/author"
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGNiZjNkNzVjYTkyNjQ1ZDExY2JhZmQiLCJlbWFpbCI6InRlc3QyQGdtYWlsLmNvbSIsImlhdCI6MTY5MTExNzU3MSwiZXhwIjoxNjkxMTIxMTcxfQ._4P7T-4XzvxUr6f5EMmDy9mSHAvNH3JeEiBDXuYIVE0",
+								"type": "text"
+							}
+						],
+						"url": "http://localhost:3003/api/author/64cc698c908659c36f3937cc"
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGNiZjNkNzVjYTkyNjQ1ZDExY2JhZmQiLCJlbWFpbCI6InRlc3QyQGdtYWlsLmNvbSIsImlhdCI6MTY5MTExNzU3MSwiZXhwIjoxNjkxMTIxMTcxfQ._4P7T-4XzvxUr6f5EMmDy9mSHAvNH3JeEiBDXuYIVE0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Sample Book4\",\r\n  \"isbn\": \"1234567890\",\r\n  \"author\": {\r\n    \"first_name\": \"John\",\r\n    \"last_name\": \"Doe\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3003/api/author"
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGNiZjNkNzVjYTkyNjQ1ZDExY2JhZmQiLCJlbWFpbCI6InRlc3QyQGdtYWlsLmNvbSIsImlhdCI6MTY5MTEyMTMxMCwiZXhwIjoxNjkxMTI0OTEwfQ.sEaDdJQXT99aNo6VQWV0u3-DUnGOIn_B4J-PrAmwyXk",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"first_name\": \"John65\",\r\n    \"last_name\": \"Doe\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3003/api/author/64cc6da8e6fc541c5a49860b"
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGNiZjNkNzVjYTkyNjQ1ZDExY2JhZmQiLCJlbWFpbCI6InRlc3QyQGdtYWlsLmNvbSIsImlhdCI6MTY5MTExNzU3MSwiZXhwIjoxNjkxMTIxMTcxfQ._4P7T-4XzvxUr6f5EMmDy9mSHAvNH3JeEiBDXuYIVE0",
+								"type": "text"
+							}
+						],
+						"url": "http://localhost:3003/api/book/64cc69cd5b6cd48f5c1c931b"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
