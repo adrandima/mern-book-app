@@ -27,7 +27,7 @@ const EditModal: React.FC<EditModalProps> = ({
     isbn: "",
     author: "",
   });
-
+  const [selectedValue, setSelectedValue] = useState<number>(1);
   const isEdit = selectedData?._id ? true : false;
 
   const validateForm = () => {
@@ -39,19 +39,22 @@ const EditModal: React.FC<EditModalProps> = ({
     };
 
     // Validate Name
-    if (!selectedData?.name.trim()) {
+    if (!selectedData?.name || !selectedData?.name.trim()) {
       errors.name = "Name is required";
       isValid = false;
     }
 
     // Validate ISBN
-    if (!selectedData?.isbn.trim()) {
+    if (
+      !selectedData?.isbn ||
+      !(selectedData?.isbn && selectedData?.isbn.trim())
+    ) {
       errors.isbn = "ISBN is required";
       isValid = false;
     }
 
-    // Validate Publication Year
-    if (!selectedData?.author) {
+    // Validate author
+    if (!selectedData?.author || !selectedBookAuthor) {
       errors.author = "Author Name is required";
       isValid = false;
     }
@@ -68,6 +71,10 @@ const EditModal: React.FC<EditModalProps> = ({
         handleSave();
       }
     }
+  };
+
+  const handleRadioChange = (value: number) => {
+    setSelectedValue(value);
   };
 
   return (
@@ -112,27 +119,105 @@ const EditModal: React.FC<EditModalProps> = ({
         </Form.Group>
         <Form.Group controlId="formEmail">
           <Form.Label>Author</Form.Label>
-          <Dropdown>
-            <Dropdown.Toggle variant="light">
-              {!!selectedBookAuthor ? selectedBookAuthor : "Select an author"}
-            </Dropdown.Toggle>
-            <Dropdown.Menu>
-              {authors.map((author) => (
-                <Dropdown.Item
-                  key={author._id}
-                  onClick={() => {
-                    setSelectedDataCallback({
-                      ...selectedData,
-                      author: author,
-                    });
-                    setdBookAuthor(`${author.first_name} ${author.last_name}`);
-                  }}
-                >
-                  {`${author.first_name} ${author.last_name}`}
-                </Dropdown.Item>
-              ))}
-            </Dropdown.Menu>
-          </Dropdown>
+          <table>
+            <tbody>
+              {!isEdit && (
+                <tr>
+                  <td>
+                    <input
+                      type="radio"
+                      value={1}
+                      checked={selectedValue === 1}
+                      onChange={() => handleRadioChange(1)}
+                    />
+                  </td>
+                  <td>
+                    <Dropdown>
+                      <Dropdown.Toggle variant="secondary">
+                        {!!selectedBookAuthor
+                          ? selectedBookAuthor
+                          : "Select an author"}
+                      </Dropdown.Toggle>
+                      <Dropdown.Menu>
+                        {authors.map((author) => (
+                          <Dropdown.Item
+                            key={author._id}
+                            onClick={() => {
+                              setSelectedDataCallback({
+                                ...selectedData,
+                                author: author,
+                              });
+                              setdBookAuthor(
+                                `${author.first_name} ${author.last_name}`
+                              );
+                            }}
+                            disabled={isEdit || selectedValue === 2}
+                          >
+                            {`${author.first_name} ${author.last_name}`}
+                          </Dropdown.Item>
+                        ))}
+                      </Dropdown.Menu>
+                    </Dropdown>
+                  </td>
+                </tr>
+              )}
+              <tr>
+                <td>
+                  <input
+                    type="radio"
+                    value={2}
+                    checked={selectedValue === 2}
+                    onChange={() => handleRadioChange(2)}
+                    style={{ marginRight: "20px" }}
+                  />
+                </td>
+                <td style={{ display: "flex" }}>
+                  <Form.Control
+                    type="text"
+                    style={{ marginRight: "10px" }}
+                    value={
+                      (selectedData?.author &&
+                        selectedData?.author.first_name) ||
+                      ""
+                    }
+                    onChange={(e) =>
+                      setSelectedDataCallback({
+                        ...selectedData,
+                        author: {
+                          ...selectedData?.author,
+                          first_name: e.target.value,
+                        },
+                      })
+                    }
+                    isInvalid={!!formErrors.isbn}
+                    disabled={isEdit || selectedValue === 1}
+                  />
+
+                  <Form.Control
+                    type="text"
+                    style={{ marginRight: "10px" }}
+                    value={
+                      (selectedData?.author &&
+                        selectedData?.author.last_name) ||
+                      ""
+                    }
+                    onChange={(e) =>
+                      setSelectedDataCallback({
+                        ...selectedData,
+                        author: {
+                          ...selectedData?.author,
+                          last_name: e.target.value,
+                        },
+                      })
+                    }
+                    isInvalid={!!formErrors.isbn}
+                    disabled={isEdit || selectedValue === 1}
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
           <Form.Control.Feedback type="invalid">
             {formErrors.author}
           </Form.Control.Feedback>
