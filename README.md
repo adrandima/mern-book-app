@@ -51,8 +51,8 @@ if the server runs on the different port you need to chnage that port in <span s
 7. Edit Author
    ![Alt Text](./project_resources/update_author.PNG)
 8. Add Author  [<span style="font-size: larger; color: red">*</span>There are two ways to add authors]
-   ![Alt Text](./project_resources/add_author.PNG)
-   ![Alt Text](./project_resources/add_author2.PNG)
+   ![Alt Text](./project_resources/add_author.png)
+   ![Alt Text](./project_resources/add_author2.png)
 
 
 ## Signup Functionality
