@@ -4,7 +4,7 @@ import {
   createBookInDB,
   updateBookInDB,
   deleteBookFromDB,
-  findBookAuthor
+  findBookAuthor,
 } from "../db/booksDB";
 
 import { createNewAuthor, deleteAuthorFromDB } from "../db/authorsDB";
@@ -40,13 +40,16 @@ export const getBookById = async (req, res) => {
 export const createBook = async (req, res) => {
   try {
     const { name, isbn, author } = req.body;
-
+    let authorId;
     // Call the createAuthor function to create a new author and get the authorId
-    const savedAuthor = await createNewAuthor({
-      first_name: author.first_name,
-      last_name: author.last_name,
-    });
-    const authorId = savedAuthor._id;
+    if (author._id) authorId = author._id;
+    else {
+      const savedAuthor = await createNewAuthor({
+        first_name: author.first_name,
+        last_name: author.last_name,
+      });
+      authorId = savedAuthor._id;
+    }
 
     // Create a new book and associate it with the newly created author
     const savedBook = await createBookInDB(name, isbn, authorId);
@@ -93,7 +96,6 @@ export const deleteBook = async (req, res) => {
 
     res.json(deletedBook);
   } catch (error) {
-    console.log("🚀 ~ file: bookController.js:95 ~ deleteBook ~ error:", error)
     res.status(500).json({ error: "Internal server error" });
   }
 };
