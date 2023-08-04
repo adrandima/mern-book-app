@@ -24,8 +24,6 @@ npm install
 ```bash
 npm run start
 ```
-<!-- Backend server is deployed on:  https://mern-we-app.azurewebsites.net 
-(if you use deployed server you need to change URl (http://localhost:3000/api => https://mern-we-app.azurewebsites.net/api) in web application path= "web-app/src/constants/config.ts" ) -->
 
 if the server runs on the different port you need to chnage that port in <span style="font-size: larger; color: red">*</span>"web-app/src/constants/config.ts"
 
