@@ -26,7 +26,7 @@ export const getAuthorById = async (req, res) => {
 
 export const createAuthor = async (req, res) => {
   try {
-    const { first_name, last_name } = req.body.author;
+    const { first_name, last_name } = req.body;
     const savedAuthor = await authorsDB.createNewAuthor({ first_name, last_name });
 
     res.status(201).json(savedAuthor);
