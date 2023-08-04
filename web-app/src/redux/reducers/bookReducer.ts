@@ -13,7 +13,13 @@ import {
   CREATE_BOOK_FAILURE,
 } from "../../constants/actionTypes";
 
-import { IBook, BookState } from "../../interface";
+import { IBook } from "../../interface/book";
+
+export interface BookState {
+  books: IBook[];
+  loading: boolean;
+  error: string | null;
+}
 
 const initialState: BookState = {
   books: [],
