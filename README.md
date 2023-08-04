@@ -25,6 +25,13 @@ npm install
 npm run start
 ```
 
+
+## Run Test on server
+
+```bash
+npm test  // Go to the server and run the test
+```
+
 if the server runs on the different port you need to chnage that port in <span style="font-size: larger; color: red">*</span>"web-app/src/constants/config.ts"
 
 # Screenshots of the UIs
