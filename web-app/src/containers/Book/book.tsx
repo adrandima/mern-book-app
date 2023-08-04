@@ -8,10 +8,13 @@ import {
   deleteBook,
   createBook,
   fetchAuthors,
+  updateAuthor
 } from "../../redux/action";
 import TablePagination from "../../components/tablePagination";
 import EditModal from "../../components/editModal";
 import { IAuthor, IBook } from "../../interface/book";
+
+import UpdateAuthorModal from "../../components/UpdateAuthorModal";
 
 interface StateProps {
   books: IBook[];
@@ -26,6 +29,7 @@ interface DispatchProps {
   deleteBook: (bookId: string) => void;
   createBook: (book: IBook) => void;
   fetchAuthors: () => void;
+  updateAuthor: (author: IAuthor) => void;
 }
 
 type Props = StateProps & DispatchProps;
@@ -34,6 +38,8 @@ class Book extends React.Component<Props> {
   state = {
     data: this.props.books,
     showModal: false,
+    showUpdateModal: false,
+    showCreateModal: false,
     selectedData: null as IBook | null,
     searchTerm: "",
     currentPage: 1,
@@ -48,7 +54,6 @@ class Book extends React.Component<Props> {
     if (prevProps.books !== this.props.books) {
       this.setState({ data: this.props.books });
     }
-    console.log("🚀 ~ file: book.tsx:49 ~ Book ~ componentDidUpdate ~ this.props:", this.state.selectedData)
   }
 
   // Pagination
@@ -113,6 +118,10 @@ class Book extends React.Component<Props> {
     }
   };
 
+  handleAuthorUpdate=(author: IAuthor) => {
+    this.props.updateAuthor(author)
+  }
+
   handleSave = () => {
     const { selectedData, data } = this.state;
 
@@ -133,7 +142,13 @@ class Book extends React.Component<Props> {
   };
 
   render() {
-    const { searchTerm, currentPage, showModal, selectedData } = this.state;
+    const {
+      searchTerm,
+      currentPage,
+      showModal,
+      showUpdateModal,
+      selectedData,
+    } = this.state;
 
     return (
       <div className="book-container">
@@ -150,6 +165,12 @@ class Book extends React.Component<Props> {
             />
             <Button variant="primary" onClick={() => this.handleEdit(null)}>
               Add Book
+            </Button>
+            <Button
+              variant="primary"
+              onClick={() => this.setState({ showUpdateModal: true })}
+            >
+              Update Author
             </Button>
           </div>
         </Form.Group>
@@ -202,6 +223,16 @@ class Book extends React.Component<Props> {
           handleUpdate={this.handleUpdate}
           setSelectedDataCallback={this.setSelectedDataCallback}
         />
+
+        <UpdateAuthorModal
+          showModal={showUpdateModal}
+          setShowModal={(value: boolean) =>
+            this.setState({ showUpdateModal: value })
+          }
+          authors={this.props.authors}
+          handleUpdate={this.handleAuthorUpdate}
+        />
+
       </div>
     );
   }
@@ -214,7 +245,7 @@ const mapStateToProps = (state: {
   books: state.book.books,
   loading: state.book.loading,
   error: state.book.error,
-  authors: state.authors.authors
+  authors: state.authors.authors,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
@@ -225,6 +256,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
       deleteBook: deleteBook,
       createBook: createBook,
       fetchAuthors: fetchAuthors,
+      updateAuthor: updateAuthor
     },
     dispatch
   );
