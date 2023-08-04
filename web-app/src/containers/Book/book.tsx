@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { Table, Button, Form } from "react-bootstrap";
 import { bindActionCreators, Dispatch } from "redux";
@@ -7,13 +7,15 @@ import {
   updateBook,
   deleteBook,
   createBook,
-} from "../../redux/action/bookActions";
+  fetchAuthors,
+} from "../../redux/action";
 import TablePagination from "../../components/tablePagination";
 import EditModal from "../../components/editModal";
-import { IBook, BookProps } from "../../interface";
+import { IAuthor, IBook } from "../../interface/book";
 
 interface StateProps {
-  books: any;
+  books: IBook[];
+  authors: IAuthor[];
   loading: any;
   error: any;
 }
@@ -23,6 +25,7 @@ interface DispatchProps {
   updateBook: (book: IBook) => void;
   deleteBook: (bookId: string) => void;
   createBook: (book: IBook) => void;
+  fetchAuthors: () => void;
 }
 
 type Props = StateProps & DispatchProps;
@@ -38,12 +41,14 @@ class Book extends React.Component<Props> {
 
   componentDidMount() {
     this.props.fetchBooks();
+    this.props.fetchAuthors();
   }
 
   componentDidUpdate(prevProps: Props) {
     if (prevProps.books !== this.props.books) {
       this.setState({ data: this.props.books });
     }
+    console.log("🚀 ~ file: book.tsx:49 ~ Book ~ componentDidUpdate ~ this.props:", this.state.selectedData)
   }
 
   // Pagination
@@ -57,16 +62,17 @@ class Book extends React.Component<Props> {
 
   currentData = () => {
     const { data, searchTerm } = this.state;
-    console.log("🚀 ~ file: book.tsx:60 ~ Book ~ this.state:", this.state)
-    console.log("🚀 ~ file: book.tsx:60 ~ Book ~ data:", data);
     const searchValue = searchTerm.toLowerCase();
 
-    return data && data
-      .filter((item: IBook) => {
-        const { name } = item;
-        return name.toLowerCase().includes(searchValue);
-      })
-      .slice(this.indexOfFirstItem(), this.indexOfLastItem());
+    return (
+      data &&
+      data
+        .filter((item: IBook) => {
+          const { name } = item;
+          return name.toLowerCase().includes(searchValue);
+        })
+        .slice(this.indexOfFirstItem(), this.indexOfLastItem())
+    );
   };
 
   totalPages = () => {
@@ -191,6 +197,7 @@ class Book extends React.Component<Props> {
           showModal={showModal}
           setShowModal={(value: boolean) => this.setState({ showModal: value })}
           selectedData={selectedData}
+          authors={this.props.authors}
           handleSave={this.handleSave}
           handleUpdate={this.handleUpdate}
           setSelectedDataCallback={this.setSelectedDataCallback}
@@ -201,11 +208,13 @@ class Book extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: {
-  book: { books: any; loading: any; error: any };
+  book: { books: IBook[]; loading: any; error: any };
+  authors: { authors: IAuthor[]; loading: any; error: any };
 }) => ({
   books: state.book.books,
   loading: state.book.loading,
   error: state.book.error,
+  authors: state.authors.authors
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
@@ -215,6 +224,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
       updateBook: updateBook,
       deleteBook: deleteBook,
       createBook: createBook,
+      fetchAuthors: fetchAuthors,
     },
     dispatch
   );

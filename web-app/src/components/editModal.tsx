@@ -1,16 +1,27 @@
 import React, { useState } from "react";
-import { Modal, Form, Button } from "react-bootstrap";
-import { EditModalProps } from "../interface";
-
+import { Modal, Form, Button, Dropdown } from "react-bootstrap";
+import { IAuthor, IBook } from "../interface/book";
+export interface EditModalProps {
+  showModal: boolean;
+  setShowModal: (show: boolean) => void;
+  selectedData: IBook | null;
+  authors: IAuthor[];
+  handleUpdate: () => void;
+  handleSave: () => void;
+  setSelectedDataCallback: (value: any) => void;
+}
 
 const EditModal: React.FC<EditModalProps> = ({
   showModal,
   setShowModal,
   selectedData,
+  authors,
   handleSave,
   handleUpdate,
   setSelectedDataCallback,
 }) => {
+  const [selectedBookAuthor, setdBookAuthor] = useState("");
+
   const [formErrors, setFormErrors] = useState({
     name: "",
     isbn: "",
@@ -41,7 +52,7 @@ const EditModal: React.FC<EditModalProps> = ({
 
     // Validate Publication Year
     if (!selectedData?.author) {
-      errors.author = "Publication Year is required";
+      errors.author = "Author Name is required";
       isValid = false;
     }
 
@@ -101,22 +112,31 @@ const EditModal: React.FC<EditModalProps> = ({
         </Form.Group>
         <Form.Group controlId="formEmail">
           <Form.Label>Author</Form.Label>
-          <Form.Control
-            type="text"
-            value={JSON.stringify(selectedData?.author)}
-            onChange={(e) =>
-              setSelectedDataCallback({
-                ...selectedData,
-                author: e.target.value,
-              })
-            }
-            isInvalid={!!formErrors.author}
-          />
+          <Dropdown>
+            <Dropdown.Toggle variant="light">
+              {!!selectedBookAuthor ? selectedBookAuthor : "Select an author"}
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              {authors.map((author) => (
+                <Dropdown.Item
+                  key={author._id}
+                  onClick={() => {
+                    setSelectedDataCallback({
+                      ...selectedData,
+                      author: author,
+                    });
+                    setdBookAuthor(`${author.first_name} ${author.last_name}`);
+                  }}
+                >
+                  {`${author.first_name} ${author.last_name}`}
+                </Dropdown.Item>
+              ))}
+            </Dropdown.Menu>
+          </Dropdown>
           <Form.Control.Feedback type="invalid">
             {formErrors.author}
           </Form.Control.Feedback>
         </Form.Group>
-
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={() => setShowModal(false)}>

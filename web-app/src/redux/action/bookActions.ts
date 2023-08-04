@@ -15,18 +15,13 @@ import {
   CREATE_BOOK_FAILURE,
 } from "../../constants/actionTypes";
 import { URL } from "../../constants/config";
-export interface Book {
-  _id: string;
-  name: string;
-  isbn: string;
-  author: number;
-}
+import { IBook } from "../../interface/book";
 
 export const fetchBooksRequest = () => ({
   type: FETCH_BOOKS_REQUEST,
 });
 
-export const fetchBooksSuccess = (books: Book[]) => ({
+export const fetchBooksSuccess = (books: IBook[]) => ({
   type: FETCH_BOOKS_SUCCESS,
   payload: books,
 });
@@ -94,7 +89,7 @@ export const fetchBooks = () => {
   };
 };
 
-export const updateBook = (book: Book) => {
+export const updateBook = (book: IBook) => {
   return async (dispatch: Dispatch) => {
     dispatch(updateBookRequest());
 
@@ -128,7 +123,7 @@ export const deleteBook = (bookId: string) => {
   };
 };
 
-export const createBook = (book: any) => {
+export const createBook = (book: IBook) => {
   return async (dispatch: Dispatch) => {
     dispatch(createBookRequest());
 
