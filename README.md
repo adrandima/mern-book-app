@@ -64,10 +64,10 @@ Error message
 
 Despite the email service issue, Users can proceed to log in using their credentials even without receiving the confirmation email.
 
-I have `<mark>`removed signup UI from webapplication but you can create a user using POSTMAN colleaction.`</mark>`
+I have `<mark>`removed signup UI from webapplication but you can create a user using POSTMAN collection.`</mark>`
 
 ## Postman collection
-
+* You can create a user with the API call in the Postman and when you try Postman calls for other api you need to include auth token to headers. Without that, it gives the error.
 [Download Postman Collection](./project_resources/MERN.postman_collection.json)
 
 
